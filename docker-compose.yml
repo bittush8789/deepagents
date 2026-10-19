@@ -1,0 +1,23 @@
+services:
+  web-search-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: web-search-agent:latest
+    container_name: web-search-agent
+    ports:
+      - "8501:8501"
+    # Copy .env.example to .env and add your keys before running.
+    env_file:
+      - .env
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import sys, urllib.request; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8501/_stcore/health', timeout=4).status == 200 else 1)"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

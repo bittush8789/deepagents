@@ -1,0 +1,21 @@
+# Version control and local environment (never bake into the image)
+.git/
+.gitignore
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Secrets and local config
+.env
+.streamlit/secrets.toml
+
+# Docs, tests, and Docker files are not needed inside the runtime image
+tests/
+README.md
+*.md
+Dockerfile
+.dockerignore
+docker-compose.yml
